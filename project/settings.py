@@ -13,6 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY","%pz17s2s+hpe^5yb&!au(3()r(huw30=k9cftb@vgb359wapo")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = os.environ.get("DEBUG","False")=="True"
 DEBUG = os.environ.get("DEBUG","False")=="True"
 DEFAULT_LOGGING_LEVEL = "DEBUG" if DEBUG else "INFO"
 
@@ -129,7 +130,7 @@ LOGGING = {
 }
 
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS","localhost").split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS","localhost").split(",") + ["127.0.0.1"]
 
 
 # Application definition
@@ -322,12 +323,11 @@ try:
 except ImportError:
     pass
 
-
 if not DEBUG:
-    SECURE_SSL_REDIRECT=True
-    SESSION_COOKIE_SECURE=True
-    CSRF_COOKIE_SECURE=True
+    SECURE_SSL_REDIRECT=False # <--- THIS SHOULD BE True IN PRODUCTION
+    SESSION_COOKIE_SECURE=False # <--- THIS SHOULD BE True IN PRODUCTION
+    CSRF_COOKIE_SECURE=False # <--- THIS SHOULD BE True IN PRODUCTION
     SECURE_HSTS_SECONDS=31536000
-    SECURE_HSTS_PRELOAD=True
-    # SECURE_HSTS-INCLUDE_SUBDOMAINS=True
-    SECURE_HSTS_PRELOAD=True
+    SECURE_HSTS_PRELOAD=False
+    # SECURE_HSTS-INCLUDE_SUBDOMAINS=False # <--- Typo in comment
+    SECURE_HSTS_PRELOAD=False
