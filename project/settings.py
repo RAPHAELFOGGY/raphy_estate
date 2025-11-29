@@ -130,7 +130,7 @@ LOGGING = {
 }
 
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS","localhost").split(",") + ["127.0.0.1"]
+ALLOWED_HOSTS = ['*'] # os.environ.get("ALLOWED_HOSTS","localhost").split(",") + ["127.0.0.1","raphy-estate.onrender.com"]
 
 
 # Application definition
